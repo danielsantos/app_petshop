@@ -18,6 +18,8 @@ function ($scope, $stateParams) {
    
 .controller('animalCtrl', function ($scope, $stateParams, $http) {
 	
+	
+	
 	$scope.submeter = function(animal) {
 		
 		$http.post('http://localhost:3000/api/animais', animal, null)
@@ -29,6 +31,8 @@ function ($scope, $stateParams) {
 		.error(function(erro) {
 			console.log(erro);
 		});
+		
+		$scope.mensagem = 'Animal cadastrado com sucesso';
 			
 	}
 
