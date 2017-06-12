@@ -34,11 +34,23 @@ angular.module('app.routes', [])
     url: '/page3',
     views: {
       'side-menu21': {
-        templateUrl: 'templates/animal.html',
+        //templateUrl: 'templates/animal.html',
+		templateUrl: 'templates/animal/list.html',
         controller: 'animalCtrl'
       }
     }
   })
+  
+  .state('menu.addAnimal', {
+    url: '/addAnimal',
+    views: {
+      'side-menu21': {
+        //templateUrl: 'templates/animal.html',
+		templateUrl: 'templates/animal.html',
+        controller: 'animalCtrl'
+      }
+    }
+  })  
 
   .state('menu', {
     url: '/side-menu21',

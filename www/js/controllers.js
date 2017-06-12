@@ -16,10 +16,9 @@ function ($scope, $stateParams) {
 
 }])
    
-.controller('animalCtrl', function ($scope, $stateParams, $http) {
+.controller('animalCtrl', function ($scope, $stateParams, $http, $ionicPopup, DatabaseValues) {
 	
-	
-	
+	/*
 	$scope.submeter = function(animal) {
 		
 		$http.post('http://localhost:3000/api/animais', animal, null)
@@ -35,6 +34,47 @@ function ($scope, $stateParams) {
 		$scope.mensagem = 'Animal cadastrado com sucesso';
 			
 	}
+	*/
+	
+	$scope.submeter = function(animal) {
+	
+		DatabaseValues.setup();
+		
+		if (animal.id) {
+
+			/*
+			DatabaseValues.bancoDeDados.transaction(function(transacao) {
+				transacao.executeSql('UPDATE usuario SET nome = ? , ' +
+				                                       ' dataNascimento = ? WHERE id = ?', [usuario.nome, 
+																							$scope.dataSelecionada, 
+																							usuario.id]);
+			});
+			
+			$ionicPopup.alert({
+				title: 'Usuário Alterado',
+				template: 'Usuário alterado com sucesso!'
+			}).then(function(){
+				$state.go('menu.listUsuarios');
+			});
+			*/
+		
+		} else {
+			
+			DatabaseValues.bancoDeDados.transaction(function(transacao) {
+				transacao.executeSql('INSERT INTO animal (nome, apelido) VALUES ( ? , ? )', [animal.nome, animal.apelido]);
+			});
+			
+			$ionicPopup.alert({
+				title: 'Pet Cadastrado',
+				template: 'Pet cadastrado com sucesso!'
+			}).then(function(){
+				$state.go('menu.listUsuarios');
+			});
+		
+		}	
+	
+	}
+	
 
 })
    
