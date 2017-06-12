@@ -1,0 +1,25 @@
+<ion-view title="Pet" id="page3">
+
+	<ion-content padding="true" class="has-header">
+  
+		<form id="animal-form1" class="list" ng-submit="submeter(animal)">
+			
+			<input type="hidden" ng-model="animal.id">
+			
+			<label class="item item-input" id="animal-input1">
+				<span class="input-label">Nome</span>
+				<input type="text" placeholder="" ng-model="animal.nome">
+			</label>
+			
+			<label class="item item-input" id="animal-input2">
+				<span class="input-label">Apelido</span>
+				<input type="text" placeholder="" ng-model="animal.apelido">
+			</label>
+
+			<button id="animal-button1" class="button button-positive button-block">Salvar</button>
+
+		</form>
+		
+	</ion-content>
+	
+</ion-view>

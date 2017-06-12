@@ -1,14 +1,11 @@
 <ion-view cache-view="false" view-title="Lista de Pets">
   <ion-content>
     <ion-list show-reorder="reordering">
-      <ion-item class="item-remove-animate item-icon-right" href="#/side-menu21/editUsuarios/{{user.id}}" ng-repeat="user in usuarios track by user.id">
+      <ion-item class="item-remove-animate item-icon-right" href="#/side-menu21/editAnimal/{{animal.id}}" ng-repeat="animal in animais track by animal.id">
 		
-		<i class="icon icon-left ion-{{user.gender}}"></i>
-        <h2 class="ion-{{user.gender}}"> {{user.nome}}</h2>
+        <h2>{{animal.nome}}</h2>
 
-		<a ng-click="removeUsuario(user.id)" class="button button-light icon ion-trash-b"></a>
-
-        <ion-reorder-button class="ion-drag" on-reorder="move(user, $fromIndex, $toIndex)"></ion-reorder-button>
+		<a ng-click="remover(animal.id)" class="button button-light icon ion-trash-b"></a>
 		
       </ion-item>
     </ion-list>

@@ -16,25 +16,42 @@ function ($scope, $stateParams) {
 
 }])
    
-.controller('animalCtrl', function ($scope, $stateParams, $http, $ionicPopup, DatabaseValues) {
+.controller('animalCtrl', function ($scope, $state, $stateParams, $http, $window, $ionicPopup, DatabaseValues) {
 	
-	/*
-	$scope.submeter = function(animal) {
+	
+	if ($state.params.animalId) {
 		
-		$http.post('http://localhost:3000/api/animais', animal, null)
-		.success(function(retorno) {
-			//$scope.mensagem = 'Animal cadastrado com sucesso';
-			console.log('Animal cadastrado com sucesso');
-			console.log(retorno);
-		})
-		.error(function(erro) {
-			console.log(erro);
+		$scope.animal = {};
+
+		DatabaseValues.setup();
+		DatabaseValues.bancoDeDados.transaction(function(transacao) {
+			
+			transacao.executeSql('SELECT * FROM animal WHERE id = ?', [$state.params.animalId], function(transacao, resultados) {
+
+				$scope.animal = resultados.rows[0];
+			
+			});
 		});
 		
-		$scope.mensagem = 'Animal cadastrado com sucesso';
+	} else {
+	
+		$scope.animais = [];
+
+		DatabaseValues.setup();
+		DatabaseValues.bancoDeDados.transaction(function(transacao) {
 			
+			transacao.executeSql('SELECT * FROM animal', [], function(transacao, resultados) {
+
+				for (var i = 0; i < resultados.rows.length; i++) {
+					
+					$scope.animais.push(resultados.rows[i]);
+					
+				}
+			
+			});
+		});
+		
 	}
-	*/
 	
 	$scope.submeter = function(animal) {
 	
@@ -42,21 +59,20 @@ function ($scope, $stateParams) {
 		
 		if (animal.id) {
 
-			/*
+			
 			DatabaseValues.bancoDeDados.transaction(function(transacao) {
-				transacao.executeSql('UPDATE usuario SET nome = ? , ' +
-				                                       ' dataNascimento = ? WHERE id = ?', [usuario.nome, 
-																							$scope.dataSelecionada, 
-																							usuario.id]);
+				transacao.executeSql('UPDATE animal SET nome = ? , ' +
+				                                      ' apelido = ? WHERE id = ?', [animal.nome, 
+																					animal.apelido, 
+																					animal.id]);
 			});
 			
 			$ionicPopup.alert({
-				title: 'Usuário Alterado',
-				template: 'Usuário alterado com sucesso!'
+				title: 'Pet Alterado',
+				template: 'Pet Alterado com sucesso!'
 			}).then(function(){
-				$state.go('menu.listUsuarios');
+				$state.go('menu.animal');
 			});
-			*/
 		
 		} else {
 			
@@ -68,13 +84,55 @@ function ($scope, $stateParams) {
 				title: 'Pet Cadastrado',
 				template: 'Pet cadastrado com sucesso!'
 			}).then(function(){
-				$state.go('menu.listUsuarios');
+				$state.go('menu.animal');
 			});
 		
 		}	
 	
 	}
 	
+	$scope.remover = function(animalId) {
+		
+		var confirmPopup = $ionicPopup.confirm({
+			
+			title: 'Remover Pet',
+			template: 'Tem certeza que deseja remover o Pet?',
+			cancelText: 'Cancelar',
+			okText: 'Confirmar'
+			
+		}).then(function(res) {
+			if (res) {
+				
+				DatabaseValues.setup();
+				DatabaseValues.bancoDeDados.transaction(function(transacao) {
+					transacao.executeSql('DELETE FROM animal WHERE id = ?', [animalId]);
+				});
+			  
+				$window.location.reload(true);				
+				
+			}
+		});
+	  
+    };	
+	
+	
+	
+
+})
+
+.controller('animalEditCtrl', function ($scope, $state, $stateParams, DatabaseValues) {
+	
+	$scope.animal = {};
+
+	DatabaseValues.setup();
+	DatabaseValues.bancoDeDados.transaction(function(transacao) {
+		
+		transacao.executeSql('SELECT * FROM animal WHERE id = ?', [$state.params.animalId], function(transacao, resultados) {
+
+			$scope.animal = resultados.rows[0];
+		
+		});
+	});
 
 })
    

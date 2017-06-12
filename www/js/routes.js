@@ -30,6 +30,8 @@ angular.module('app.routes', [])
     }
   })
 
+  /***** ANIMAL *****/
+  
   .state('menu.animal', {
     url: '/page3',
     views: {
@@ -46,12 +48,25 @@ angular.module('app.routes', [])
     views: {
       'side-menu21': {
         //templateUrl: 'templates/animal.html',
-		templateUrl: 'templates/animal.html',
+		templateUrl: 'templates/animal/edit.html',
         controller: 'animalCtrl'
       }
     }
   })  
+  
+  .state('menu.editAnimal', {
+      url: '/editAnimal/:animalId',
+	  views : {
+			'side-menu21' : {
+				templateUrl: 'templates/animal/edit.html',
+				controller: 'animalCtrl'
+			}
+	  }
+    })  
+    
 
+  /***** ANIMAL *****/
+    
   .state('menu', {
     url: '/side-menu21',
     templateUrl: 'templates/menu.html',
