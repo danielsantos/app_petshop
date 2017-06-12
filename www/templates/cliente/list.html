@@ -1,0 +1,20 @@
+<ion-view cache-view="false" view-title="Lista de Clientes">
+  <ion-content>
+    <ion-list show-reorder="reordering">
+      <ion-item class="item-remove-animate item-icon-right" href="#/side-menu21/editCliente/{{cliente.id}}" ng-repeat="cliente in clientes track by cliente.id">
+		
+        <h2>{{cliente.nome}}</h2>
+
+		<a ng-click="remover(cliente.id)" class="button button-light icon ion-trash-b"></a>
+		
+      </ion-item>
+    </ion-list>
+    <br><br><br>
+  </ion-content>
+  <div class="bar bar-footer bar-stable">
+	  <div class="row">
+	  	&nbsp;&nbsp;&nbsp;
+		<a href="#/side-menu21/addCliente" class="col button button-balanced ion-person-add"> Adicionar Cliente</a>
+  	</div>
+  </div>
+</ion-view>

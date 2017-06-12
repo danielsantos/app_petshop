@@ -32,7 +32,13 @@ angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.directives
 		//transacao.executeSql('DROP TABLE  animal', [])
 		transacao.executeSql('CREATE TABLE IF NOT EXISTS animal (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, ' + 
 																' nome VARCHAR(300), ' +
-		      										            ' apelido VARCHAR(50));', [])		
+		      										            ' apelido VARCHAR(50));', []);
+		
+		transacao.executeSql('CREATE TABLE IF NOT EXISTS cliente (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, ' + 
+		     													' nome VARCHAR(300), ' +
+			     									            ' cpf VARCHAR(50), ' +
+				         										' celular VARCHAR(50));', []);
+																
 	});		
 	
 	

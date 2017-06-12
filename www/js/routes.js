@@ -36,7 +36,6 @@ angular.module('app.routes', [])
     url: '/page3',
     views: {
       'side-menu21': {
-        //templateUrl: 'templates/animal.html',
 		templateUrl: 'templates/animal/list.html',
         controller: 'animalCtrl'
       }
@@ -47,7 +46,6 @@ angular.module('app.routes', [])
     url: '/addAnimal',
     views: {
       'side-menu21': {
-        //templateUrl: 'templates/animal.html',
 		templateUrl: 'templates/animal/edit.html',
         controller: 'animalCtrl'
       }
@@ -64,8 +62,40 @@ angular.module('app.routes', [])
 	  }
     })  
     
+  /***** CLIENTE *****/
+  
+  .state('menu.cliente', {
+    url: '/page3',
+    views: {
+      'side-menu21': {
+		templateUrl: 'templates/cliente/list.html',
+        controller: 'clienteCtrl'
+      }
+    }
+  })
+  
+  .state('menu.addCliente', {
+    url: '/addCliente',
+    views: {
+      'side-menu21': {
+		templateUrl: 'templates/cliente/edit.html',
+        controller: 'clienteCtrl'
+      }
+    }
+  })  
+  
+  .state('menu.editCliente', {
+      url: '/editCliente/:clienteId',
+	  views : {
+			'side-menu21' : {
+				templateUrl: 'templates/cliente/edit.html',
+				controller: 'clienteCtrl'
+			}
+	  }
+    })  
+    
 
-  /***** ANIMAL *****/
+  /*****  *****/
     
   .state('menu', {
     url: '/side-menu21',
